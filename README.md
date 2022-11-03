@@ -16,9 +16,13 @@ Pull requests are welcome. For major changes, please contact us to discuss what 
 ## Authors and acknowledgment
 
 Daniel Girtsis
+
 Jüri Kajava
+
 Aleksander Dalton
+
 Jüri Skljarenko
+
 Ervin Rebane
 
 
