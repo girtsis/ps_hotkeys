@@ -31,7 +31,7 @@ Ervin Rebane
 ## Project status
 The project is under development
 
-22.08.2022 - ...
+22.09.2022 - ...
 
 
 ## License [MIT]
