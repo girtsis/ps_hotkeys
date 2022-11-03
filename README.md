@@ -5,7 +5,9 @@ Photoshop Hotkeys is a website that will make using Photoshop several times easi
 ## Tech stack
 
 Front-end - React
+
 Back-end - Node.js
+
 Database - mySQL
 
 
