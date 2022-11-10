@@ -27,6 +27,19 @@ Jüri Skljarenko
 
 Ervin Rebane
 
+##setup
+
+open new terminal in the root directory and run (seperately):
+```
+npm install
+npm start
+```
+then open a new terminal and run (seperately):
+```
+cd client
+npm install
+npm start
+```
 
 ## Project status
 The project is under development
