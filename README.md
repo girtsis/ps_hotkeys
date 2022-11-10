@@ -27,7 +27,7 @@ Jüri Skljarenko
 
 Ervin Rebane
 
-##setup
+## Setup
 
 open new terminal in the root directory and run (seperately):
 ```
@@ -40,6 +40,13 @@ cd client
 npm install
 npm start
 ```
+
+If you get error when running 'npm start'
+
+Run Powershell as Admin, and then:
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+https://stackoverflow.com/questions/63423584/how-to-fix-error-nodemon-ps1-cannot-be-loaded-because-running-scripts-is-disabl
 
 ## Project status
 The project is under development
