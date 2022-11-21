@@ -4,9 +4,7 @@ Photoshop Hotkeys is a website that will make using Photoshop several times easi
 
 ## Tech stack
 
-Front-end - React
-
-Back-end - Node.js
+Full-stack - Next.js
 
 Database - mySQL
 
@@ -32,14 +30,9 @@ Ervin Rebane
 open new terminal in the root directory and run (seperately):
 ```
 npm install
-npm start
+npm run dev
 ```
-then open a new terminal and run (seperately):
-```
-cd client
-npm install
-npm start
-```
+
 
 If you get error when running 'npm start'
 
