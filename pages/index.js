@@ -19,7 +19,7 @@ export default function Home() {
 
                   <h4 className="hkTitle">Change Image Size</h4>
 
-                  <p className="hkDescription">Control + Alt + i (Command + Option + i )</p>
+                  <p className="hkDescription" contentEditable={true}>Control + Alt + i (Command + Option + i )</p>
 
               </div>
 

@@ -1,0 +1,72 @@
+.previewContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    height: 800px;
+}
+
+.left {
+    width: 427px;
+    background-color: #22282C;
+}
+
+.right{
+    width: 849px;
+    background-color: #3C90AA;
+}
+
+.bodyContainer{
+    margin-left: 124px;
+}
+
+.bodyHotkey {
+    color: #3C90AA;
+    font-family: 'Gelasio';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 41.374px;
+    line-height: 53px;
+
+    letter-spacing: -0.02em;
+}
+
+.bodyDescription {
+    padding-right: 48px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14.54px;
+    line-height: 22px;
+
+    color: #838383;
+}
+
+.hotkeyName{
+    width: fit-content;
+    position: relative;
+    width: 821.71px;
+    height: 165.29px;
+
+    font-family: 'Gelasio';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 120.14px;
+    line-height: 153px;
+    letter-spacing: -0.02em;
+
+    background: linear-gradient(89.94deg, rgba(255, 255, 255, 0.91) 64.62%, #C1C1C1 103.4%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hkInput {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
