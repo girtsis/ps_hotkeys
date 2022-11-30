@@ -61,8 +61,10 @@ export default function Home() {
         const reader = new FileReader();
         //The event will be triggered when the file reading has completed
         reader.addEventListener("load", (e) => {
-            setGuideImages([...guideImages, {id: uniqueId, file: e.target.result}]);
+            setGuideImages([...guideImages, {id: uniqueId, file: e.target.result, caption: ""}]);
         });
+        let newId = uniqueId+1;
+        setUniqueId(newId);
 
         //When this operation is finished loadend is triggered, in other words above block will be executed
         reader.readAsDataURL(imageFile);
@@ -71,7 +73,7 @@ export default function Home() {
     function renderCarouselIndicators(){
         let buttons = [];
         for (let i = 1; i < guideImages.length; i++) {
-            buttons.push(<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={i} aria-label={`Slide ${i+1}`}></button>)
+            buttons.push(<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={i} aria-label={`Slide ${i+1}`} key={`b${i}`}></button>)
         }
         return (
             <div className="carousel-indicators">
@@ -85,7 +87,7 @@ export default function Home() {
         let items = [];
         for (let i = 1; i < guideImages.length; i++) {
             items.push(
-                <div className="carousel-item">
+                <div className="carousel-item" key={`c${i}`}>
                     <img src={guideImages[i].file} className="d-block w-100" alt="..."/>
                     <div className="carousel-caption d-none d-md-block">
                         <p>{guideImages[i].caption}</p>
@@ -97,10 +99,28 @@ export default function Home() {
 
         return(
             <div className="carousel-inner">
-                <div className="carousel-item active "><img className='d-block w-100' src={guideImages[0] ? guideImages[0].file : ""}></img></div>
+                <div className="carousel-item active ">
+                    <img className='d-block w-100' src={guideImages[0] ? guideImages[0].file : ""}></img>
+                    <div className="carousel-caption d-none d-md-block">
+                        <p>{guideImages[0] ? guideImages[0].caption : ""}</p>
+                    </div>
+                </div>
                 {items}
             </div>
         )
+    }
+
+    function handleCaptionChange(e){
+        let fileId = parseInt(e.target.parentNode.dataset.id);
+        let newState = guideImages.map((file) => {
+            if(file.id === fileId){
+                return {...file, caption: e.target.value};
+            }
+
+            return file;
+        })
+
+        setGuideImages(newState);
     }
 
     return(
@@ -133,9 +153,11 @@ export default function Home() {
                                 <>
                                     {guideImages.map((image, i) => {
                                         return (
-                                            <div>
+                                            <div key={image.id} data-id={image.id}>
                                                 <p>Order: {i+1}</p>
                                                 <img src={image.file} height={200} className="my-4"></img>
+                                                <label>Caption</label>
+                                                <input name='caption' onChange={handleCaptionChange}></input>
                                             </div>
 
                                         )
@@ -153,7 +175,6 @@ export default function Home() {
                     console.log(guideImages);
                 }}>guideImages</button>
                 <h3>Test</h3>
-
 
                 <h3>Preview</h3>
 
