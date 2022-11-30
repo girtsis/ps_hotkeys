@@ -20,6 +20,10 @@
 }
 
 .bodyHotkey {
+    overflow-wrap: break-word;
+    overflow-y: hidden;
+    max-height: 212px;
+
     color: #3C90AA;
     font-family: 'Gelasio';
     font-style: normal;
@@ -31,8 +35,11 @@
 }
 
 .bodyDescription {
-    padding-right: 48px;
+    overflow-wrap: break-word;
+    overflow-y: hidden;
+    max-height: 220px;
 
+    padding-right: 48px;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
@@ -45,7 +52,7 @@
 .hotkeyName{
     width: fit-content;
     position: relative;
-    width: 821.71px;
+    width: 960px;
     height: 165.29px;
 
     font-family: 'Gelasio';

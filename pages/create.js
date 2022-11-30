@@ -23,14 +23,14 @@ export default function Home() {
     const imageRef = useRef(null);
 
     function useDisplayImage() {
-        const [result, setResult] = React.useState("");
+        const [result, setResult] = useState("");
 
         function uploader(e) {
         const imageFile = e.target.files[0];
 
         const reader = new FileReader();
-        reader.addEventListener("load", (e) => {
-            setResult(e.target.result);
+            reader.addEventListener("load", (e) => {
+                setResult(e.target.result);
         });
 
         reader.readAsDataURL(imageFile);
@@ -41,24 +41,33 @@ export default function Home() {
 
     const { result, uploader } = useDisplayImage();
 
+    async function handleSubmit(e){
+        e.preventDefault();
+        console.log(image);
+    }
+
     return(
         <Layout>
             <div className='container'>
                 <div style={{marginTop: 124, marginBottom: 64}}>
-                    <label htmlFor='name'>Hotkey name: </label>
-                    <input type={"text"} id="name" onChange={handleNameChange} className={styles.hkInput}></input>
+                    <form onSubmit={handleSubmit}>
+                        <label htmlFor='name'>Hotkey name: </label>
+                        <input required type={"text"} id="name" onChange={handleNameChange} className={styles.hkInput}></input>
 
-                    <label htmlFor='hotkey'>Hotkey keys: </label>
-                    <input type={"text"} id="hotkey" onChange={handleKeyChange} className={styles.hkInput}></input>
+                        <label htmlFor='hotkey'>Hotkey keys: </label>
+                        <input required type={"text"} id="hotkey" onChange={handleKeyChange} className={styles.hkInput}></input>
 
-                    <label htmlFor='description'>Hotkey description: </label>
-                    <input type={"text"} id="description" onChange={handleDescriptionChange} className={styles.hkInput}></input>
+                        <label htmlFor='description'>Hotkey description: </label>
+                        <input required type={"text"} id="description" onChange={handleDescriptionChange} className={styles.hkInput} ></input>
 
-                    <label htmlFor='image'>Image: </label>
-                    <input type={"file"} id="image" onChange={(e) => {
-                        setImage(e.target.files[0]);
-                        uploader(e);
-                    }} className={styles.hkInput}></input>
+                        <label htmlFor='image'>Image: </label>
+                        <input required type={"file"} id="image" onChange={(e) => {
+                            setImage(e.target.files[0]);
+                            uploader(e);
+                        }} className={styles.hkInput}></input>
+
+                        <input type={"submit"} className="btn btn-primary" value={"Submit"}/>
+                    </form>
                 </div>
                 <div className={styles.previewContainer}>
                     <div className={styles.left}>
