@@ -6,6 +6,8 @@ export default function Home() {
     const [hotkeyName, setHotkeyName] = useState("Eyedropper");
     const [hotkeyKey, setHotkeyKey] = useState("Press \"i\"");
     const [hotkeyDescription, setHotkeyDescription] = useState("The Eyedropper tool is used to select a color from an image or any Photoshop document.");
+    let [uniqueId, setUniqueId] = useState(1);
+    const [carouselIndicators, setCarouselIndicators] = useState([]);
 
     function handleNameChange(e){
         setHotkeyName(e.target.value);
@@ -20,22 +22,29 @@ export default function Home() {
     }
 
     const [image, setImage] = useState("");
-    const imageRef = useRef(null);
+    const [guideImages, setGuideImages] = useState([]);
 
+
+    //Can be reused anywhere
+    //If needed, move to lib folder
     function useDisplayImage() {
         const [result, setResult] = useState("");
 
         function uploader(e) {
         const imageFile = e.target.files[0];
 
+        //Initialize new FileReader to read files selected by user
         const reader = new FileReader();
-            reader.addEventListener("load", (e) => {
-                setResult(e.target.result);
+        //The event will be triggered when the file reading has completed
+        reader.addEventListener("load", (e) => {
+            setResult(e.target.result);
         });
 
+        //When this operation is finished loadend is triggered, in other words above block will be executed
         reader.readAsDataURL(imageFile);
         }
 
+        //returns the image source and uploader function
         return { result, uploader };
     }
 
@@ -43,7 +52,55 @@ export default function Home() {
 
     async function handleSubmit(e){
         e.preventDefault();
-        console.log(image);
+    }
+
+    function onGuidanceChange(e){
+        const imageFile = e.target.files[0];
+
+        //Initialize new FileReader to read files selected by user
+        const reader = new FileReader();
+        //The event will be triggered when the file reading has completed
+        reader.addEventListener("load", (e) => {
+            setGuideImages([...guideImages, {id: uniqueId, file: e.target.result}]);
+        });
+
+        //When this operation is finished loadend is triggered, in other words above block will be executed
+        reader.readAsDataURL(imageFile);
+    }
+
+    function renderCarouselIndicators(){
+        let buttons = [];
+        for (let i = 1; i < guideImages.length; i++) {
+            buttons.push(<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={i} aria-label={`Slide ${i+1}`}></button>)
+        }
+        return (
+            <div className="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+                {buttons}
+            </div>
+            );
+    }
+
+    function renderCarouselItems(){
+        let items = [];
+        for (let i = 1; i < guideImages.length; i++) {
+            items.push(
+                <div className="carousel-item">
+                    <img src={guideImages[i].file} className="d-block w-100" alt="..."/>
+                    <div className="carousel-caption d-none d-md-block">
+                        <p>{guideImages[i].caption}</p>
+                    </div>
+                </div>
+            )
+            
+        }
+
+        return(
+            <div className="carousel-inner">
+                <div className="carousel-item active "><img className='d-block w-100' src={guideImages[0] ? guideImages[0].file : ""}></img></div>
+                {items}
+            </div>
+        )
     }
 
     return(
@@ -62,13 +119,41 @@ export default function Home() {
 
                         <label htmlFor='image'>Image: </label>
                         <input required type={"file"} accept={"image/png, image/jpeg"} id="image" onChange={(e) => {
+                            //set file to send to server on submit
                             setImage(e.target.files[0]);
                             uploader(e);
                         }} className={styles.hkInput}></input>
 
+                        <div className='my-5'>
+                            <h3 className='fw-bold'>Guidance images</h3>
+                            <input type={"file"} accept={"image/png, image/jpeg"} onChange={onGuidanceChange}></input>
+                            <br></br>
+
+                            {guideImages && (
+                                <>
+                                    {guideImages.map((image, i) => {
+                                        return (
+                                            <div>
+                                                <p>Order: {i+1}</p>
+                                                <img src={image.file} height={200} className="my-4"></img>
+                                            </div>
+
+                                        )
+                                    })}
+                                </>
+                            )}
+                        </div>
+
                         <input type={"submit"} className="btn btn-primary" value={"Submit"}/>
                     </form>
+
                 </div>
+
+                <button onClick={() => {
+                    console.log(guideImages);
+                }}>guideImages</button>
+                <h3>Test</h3>
+
 
                 <h3>Preview</h3>
 
@@ -81,25 +166,43 @@ export default function Home() {
                             <p className={styles.bodyDescription}>{hotkeyDescription}</p>
                         </div>
 
-                        {/*Trigger modal*/}
-                        <img src='/carousel1.png' width={280} className={styles.helperImage} data-bs-toggle="modal" data-bs-target="#carouselModalCenter"/>
+                        {/*Trigger modal
+                        TODO: find the most suitable image size*/}
+                        {guideImages.length >= 1 && (
+                            <img src={guideImages[0].file} width={280} height={180} className={styles.helperImage} data-bs-toggle="modal" data-bs-target="#carouselModalCenter"/>
+                        )}
+
                     </div>
                     <div className={styles.right}>
-                        {result && <img ref={imageRef} src={result} style={{height: "100%"}} alt="" />}
+                        {result && <img src={result} style={{height: "100%"}} alt="" />}
                         {/* <img src='/hk1.png' style={{height: "100%"}}/> */}
                     </div>
                 </div>
             </div>
 
             {/* Modal */}
-            <div className='modal fade' id='carouselModalCenter' tabIndex={-1} role="dialog" aria-labelledby="carouselModalCenter" aria-hidden={true}>
-                <div className='modal-dialog modal-dialog-centered modal-xl' role="document">
+            <div className='modal fade' data-bs-backdrop="static" id='carouselModalCenter' tabIndex={-1} role="dialog" aria-labelledby="carouselModalCenter" aria-hidden={true}>
+                <div className='modal-dialog modal-dialog-centered modal-lg' role="document">
                     <div className='modal-content'>
                         <div className='modal-header'>
-                            <span type='button' className='close' data-dismiss='modal' aria-label='close' aria-hidden='true' style={{fontSize:48, color: "#f1f1f1", right: 0}}>&times;</span>
+                            <span type='button' className='close' data-bs-dismiss='modal' aria-label='close' aria-hidden='true' style={{fontSize:48, color: "#f1f1f1", right: 0}}>&times;</span>
                         </div>
                         <div className='modal-body'>
-                            <img src='/carousel1.png'></img>
+
+                            <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="false">
+                                {renderCarouselIndicators()}
+
+                                {renderCarouselItems()}
+                                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span className="visually-hidden">Previous</span>
+                                </button>
+                                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span className="visually-hidden">Next</span>
+                                </button>
+                            </div>
+
                         </div>
                     </div>
                 </div>
