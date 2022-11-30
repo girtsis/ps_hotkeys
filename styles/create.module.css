@@ -6,12 +6,15 @@
 }
 
 .left {
+    position: relative;
     width: 427px;
     background-color: #22282C;
 }
 
 .right{
+    max-width: 1080px;
     width: 849px;
+    min-width: 200px;
     background-color: #3C90AA;
 }
 
@@ -76,4 +79,15 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+.helperImage{
+    position: absolute;
+    bottom: 0px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.helperImage:hover{
+    opacity: 0.6;
 }

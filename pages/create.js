@@ -61,7 +61,7 @@ export default function Home() {
                         <input required type={"text"} id="description" onChange={handleDescriptionChange} className={styles.hkInput} ></input>
 
                         <label htmlFor='image'>Image: </label>
-                        <input required type={"file"} id="image" onChange={(e) => {
+                        <input required type={"file"} accept={"image/png, image/jpeg"} id="image" onChange={(e) => {
                             setImage(e.target.files[0]);
                             uploader(e);
                         }} className={styles.hkInput}></input>
@@ -69,6 +69,9 @@ export default function Home() {
                         <input type={"submit"} className="btn btn-primary" value={"Submit"}/>
                     </form>
                 </div>
+
+                <h3>Preview</h3>
+
                 <div className={styles.previewContainer}>
                     <div className={styles.left}>
                         <img src='/logo.png' width={164}/>
@@ -77,10 +80,27 @@ export default function Home() {
                             <h4 className={styles.bodyHotkey}>{hotkeyKey}</h4>
                             <p className={styles.bodyDescription}>{hotkeyDescription}</p>
                         </div>
+
+                        {/*Trigger modal*/}
+                        <img src='/carousel1.png' width={280} className={styles.helperImage} data-bs-toggle="modal" data-bs-target="#carouselModalCenter"/>
                     </div>
                     <div className={styles.right}>
                         {result && <img ref={imageRef} src={result} style={{height: "100%"}} alt="" />}
                         {/* <img src='/hk1.png' style={{height: "100%"}}/> */}
+                    </div>
+                </div>
+            </div>
+
+            {/* Modal */}
+            <div className='modal fade' id='carouselModalCenter' tabIndex={-1} role="dialog" aria-labelledby="carouselModalCenter" aria-hidden={true}>
+                <div className='modal-dialog modal-dialog-centered modal-xl' role="document">
+                    <div className='modal-content'>
+                        <div className='modal-header'>
+                            <span type='button' className='close' data-dismiss='modal' aria-label='close' aria-hidden='true' style={{fontSize:48, color: "#f1f1f1", right: 0}}>&times;</span>
+                        </div>
+                        <div className='modal-body'>
+                            <img src='/carousel1.png'></img>
+                        </div>
                     </div>
                 </div>
             </div>
