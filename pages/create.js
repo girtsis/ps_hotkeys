@@ -7,7 +7,6 @@ export default function Home() {
     const [hotkeyKey, setHotkeyKey] = useState("Press \"i\"");
     const [hotkeyDescription, setHotkeyDescription] = useState("The Eyedropper tool is used to select a color from an image or any Photoshop document.");
     let [uniqueId, setUniqueId] = useState(1);
-    const [carouselIndicators, setCarouselIndicators] = useState([]);
 
     function handleNameChange(e){
         setHotkeyName(e.target.value);
@@ -52,6 +51,19 @@ export default function Home() {
 
     async function handleSubmit(e){
         e.preventDefault();
+
+        console.log(image);
+        console.log(guideImages[0]);
+
+        // const formData = new FormData();
+        // formData.append(e.target.name.name, e.target.name.value);
+        // formData.append(e.target.description.name, e.target.description.value);
+        // formData.append(e.target.shortcutdescription.name, e.target.shortcutdescription.value);
+        // formData.append(e.target.hotkeyimage.name, e.target.hotkeyimage.files[0]);
+
+        // guideImages.forEach(file => {
+            
+        // });
     }
 
     function onGuidanceChange(e){
@@ -129,26 +141,26 @@ export default function Home() {
                 <div style={{marginTop: 124, marginBottom: 64}}>
                     <form onSubmit={handleSubmit}>
                         <label htmlFor='name'>Hotkey name: </label>
-                        <input required type={"text"} id="name" onChange={handleNameChange} className={styles.hkInput}></input>
+                        <input required type={"text"} id="name" name="Name" onChange={handleNameChange} className={styles.hkInput}></input>
 
                         <label htmlFor='hotkey'>Hotkey keys: </label>
-                        <input required type={"text"} id="hotkey" onChange={handleKeyChange} className={styles.hkInput}></input>
+                        <input required type={"text"} id="hotkey" name="ShortcutDescription" onChange={handleKeyChange} className={styles.hkInput}></input>
 
                         <label htmlFor='description'>Hotkey description: </label>
-                        <input required type={"text"} id="description" onChange={handleDescriptionChange} className={styles.hkInput} ></input>
+                        <input required type={"text"} id="description" name="Description" onChange={handleDescriptionChange} className={styles.hkInput} ></input>
 
                         <label htmlFor='image'>Image: </label>
-                        <input required type={"file"} accept={"image/png, image/jpeg"} id="image" onChange={(e) => {
+                        <input required type={"file"} accept={"image/png, image/jpeg"} name="HotkeyImage" id="image" onChange={(e) => {
                             //set file to send to server on submit
                             setImage(e.target.files[0]);
                             uploader(e);
                         }} className={styles.hkInput}></input>
 
-                        <div className='my-5'>
-                            <h3 className='fw-bold'>Guidance images</h3>
-                            <input type={"file"} accept={"image/png, image/jpeg"} onChange={onGuidanceChange}></input>
-                            <br></br>
+                        <br></br>
 
+                        <h3 className='fw-bold'>Guidance images</h3>
+                        <input type={"file"} accept={"image/png, image/jpeg"} name="GuidanceImages" onChange={onGuidanceChange}></input>
+                        <div className='my-5'>
                             {guideImages && (
                                 <>
                                     {guideImages.map((image, i) => {
