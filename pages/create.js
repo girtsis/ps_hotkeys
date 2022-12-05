@@ -20,7 +20,9 @@ export default function Home() {
         setHotkeyDescription(e.target.value);
     }
 
-    const [image, setImage] = useState("");
+    const [uploadImage, setImage] = useState("");
+    const [uploadGuideImages, setUploadGuideImages] = useState([]);
+
     const [guideImages, setGuideImages] = useState([]);
 
 
@@ -52,18 +54,28 @@ export default function Home() {
     async function handleSubmit(e){
         e.preventDefault();
 
-        console.log(image);
-        console.log(guideImages[0]);
+        console.log(uploadImage);
+        console.log(uploadGuideImages);
 
-        // const formData = new FormData();
-        // formData.append(e.target.name.name, e.target.name.value);
-        // formData.append(e.target.description.name, e.target.description.value);
-        // formData.append(e.target.shortcutdescription.name, e.target.shortcutdescription.value);
-        // formData.append(e.target.hotkeyimage.name, e.target.hotkeyimage.files[0]);
+        const formData = new FormData();
+        formData.append("Name", e.target.name.value);
+        formData.append("Description", e.target.description.value);
+        formData.append("ShortcutDescription", e.target.ShortcutDescription.value);
+        formData.append("HotkeyImage", uploadImage);
 
-        // guideImages.forEach(file => {
-            
-        // });
+        if(uploadGuideImages.length != 0){
+            uploadGuideImages.forEach(file => {
+                formData.append("GuidanceImages", file)
+            });
+        }
+
+        const response = await fetch("/api/createGuide", {
+            method: "POST",
+
+            body: formData
+        });
+
+        console.log(response.json());
     }
 
     function onGuidanceChange(e){
@@ -159,7 +171,10 @@ export default function Home() {
                         <br></br>
 
                         <h3 className='fw-bold'>Guidance images</h3>
-                        <input type={"file"} accept={"image/png, image/jpeg"} name="GuidanceImages" onChange={onGuidanceChange}></input>
+                        <input type={"file"} accept={"image/png, image/jpeg"} name="GuidanceImages" onChange={(e) => {
+                            setUploadGuideImages([...uploadGuideImages, e.target.files[0]]);
+                            onGuidanceChange(e);
+                            }}></input>
                         <div className='my-5'>
                             {guideImages && (
                                 <>
