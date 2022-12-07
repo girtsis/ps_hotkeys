@@ -1,0 +1,20 @@
+Control + Alt + i (Command + Option + i )	|| Change image size
+Control + Alt + c (Command + Option + c )	|| Change canvas size 
+Control + r (Command + r )					|| Show Rulers 
+Control + ' (Command + ' )					|| Show or hide the grid 
+Control + T (Command + T )					|| Free Transform 
+W 											|| Magic wand
+A 											|| Path Selection
+C 											|| Perspective cropping
+B 											|| Brush
+L 											|| Lasso
+O 											|| Illuminator
+P 											|| Feather
+V 											|| Move
+I 											|| Pipette
+R 											|| View rotation
+U 											|| Rectangle
+C 											|| frame
+H 											|| Hand
+T 											|| Text
+S 											|| Stamp
