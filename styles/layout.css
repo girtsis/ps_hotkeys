@@ -30,3 +30,12 @@
 
     color: #6B6B6B;
 }
+
+#carouselModalCenter .modal-content{
+    background-color: rgba(0,0,0,0);
+    border: none;
+}
+
+#carouselModalCenter .modal-header{
+    border-bottom: none;
+}
