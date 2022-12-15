@@ -5,7 +5,7 @@ export default function Home() {
     <Layout>
       <div className="container">
 
-      <p style={{fontSize: 36, fontWeight: 400, fontFamily: "Inter", color: "#252DFB;"}}>Aliquip irure elit officia aliqua magna occaecat sint minim cillum ea officia ex laborum eu. Cillum in proident esse quis aliqua irure commodo duis non enim. Officia consectetur aliqua veniam duis esse tempor magna sunt et cillum quis eiusmod laboris. Tempor velit aliquip ut sint cillum elit amet tempor et esse duis.</p>
+      <p style={{fontSize: 36, fontWeight: 400, fontFamily: "Inter", color: "#252DFB"}}>Aliquip irure elit officia aliqua magna occaecat sint minim cillum ea officia ex laborum eu. Cillum in proident esse quis aliqua irure commodo duis non enim. Officia consectetur aliqua veniam duis esse tempor magna sunt et cillum quis eiusmod laboris. Tempor velit aliquip ut sint cillum elit amet tempor et esse duis.</p>
 
       </div>
 
@@ -19,7 +19,7 @@ export default function Home() {
 
                   <h4 className="hkTitle">Change Image Size</h4>
 
-                  <p className="hkDescription" contentEditable={true}>Control + Alt + i (Command + Option + i )</p>
+                  <p className="hkDescription">Control + Alt + i (Command + Option + i )</p>
 
               </div>
 
