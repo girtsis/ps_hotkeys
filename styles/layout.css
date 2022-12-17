@@ -1,17 +1,19 @@
+body{
+    background-color: #F2F2F2;
+}
+
 .hkTitle{
-    font-family: Gilroy;
+    font-family: Inter;
     font-weight: 800;
     font-size: 26px;
     line-height: 31.85px;
 }
 .hkDescription{
-    font-family: 'Gilroy';
+    font-family: 'Inter';
     font-style: normal;
-    font-weight: 800;
     font-size: 20px;
     line-height: 25px;
     /* identical to box height */
-
 
     color: #3C3C3C;
 }
@@ -28,8 +30,39 @@
     margin-top: 24px;
     margin-bottom: 24px;
 
+
+    
+    margin-right: 0;
+
     color: #6B6B6B;
 }
+
+#tableSearch{
+background-color: #628EFF;
+opacity: 42%;
+border-color: black;
+text-align: center;
+text-decoration: white;
+color: white;
+text-decoration-color: white;
+border-radius: 0%;
+align-self: center;
+}
+
+#tableSearch:focus{
+    background-color: white;
+    border-color: black;
+    opacity: 100%;
+    text-align: center;
+    text-decoration: black;
+    color: black;
+    text-decoration-color: black;
+    box-shadow: none;
+    }
+
+    #tableSearch::placeholder{
+        color: white;
+        }
 
 #carouselModalCenter .modal-content{
     background-color: rgba(0,0,0,0);
